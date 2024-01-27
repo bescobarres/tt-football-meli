@@ -1,6 +1,7 @@
 package com.bescobarres.football.infrastructure.mapper;
 
 import com.bescobarres.football.domain.dto.Training;
+import com.bescobarres.football.domain.dto.input.TrainingInputDto;
 import com.bescobarres.football.domain.entity.PlayerEntity;
 import com.bescobarres.football.domain.entity.TrainingEntity;
 import com.bescobarres.football.domain.model.Player;
@@ -41,4 +42,18 @@ public interface TrainingMapper {
 
 
     List<Training> entityToModel(List<TrainingEntity> training);
+
+    @Mappings({
+            @Mapping(source = "playerId", target = "player.id"),
+            @Mapping(source = "name", target = "player.name"),
+            @Mapping(source = "power", target = "stats.power"),
+            @Mapping(source = "distance", target = "stats.distance"),
+            @Mapping(source = "time", target = "stats.time"),
+            @Mapping(source = "passes", target = "stats.passes"),
+            @Mapping(source = "date", target = "date"),
+    })
+    Training dtoToModel(TrainingInputDto trainingDto);
+
+    List<Training> dtoToModel(List<TrainingInputDto> trainingsDto);
+
 }

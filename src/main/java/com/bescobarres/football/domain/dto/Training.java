@@ -16,18 +16,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Valid
 public class Training {
 
     private Long id;
-    @NotNull
     private Player player;
     private Stats stats;
-
-    @NotNull(message = "El entrenamiento debe tener una fecha en el formato yyyy-MM-dd ")
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
-
-
 
 }

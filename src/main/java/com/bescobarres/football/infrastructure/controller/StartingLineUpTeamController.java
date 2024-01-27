@@ -1,7 +1,6 @@
 package com.bescobarres.football.infrastructure.controller;
 
 import com.bescobarres.football.application.service.StartingLineUpTeamService;
-import com.bescobarres.football.domain.dto.TrainingPlayer;
 import com.bescobarres.football.domain.model.StartingLineUp;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +19,10 @@ public class StartingLineUpTeamController {
     }
 
     @GetMapping("/team")
-    public List<StartingLineUp> getStartingLineUpTeam(@RequestParam LocalDate date)  {
+    public List<StartingLineUp> getStartingLineUpTeam(@RequestParam(value = "date", defaultValue = "#{T(java.time.LocalDate).now()}") LocalDate date,
+                                                      @RequestParam(value = "startingLineUpQuantity", defaultValue = "5") int startingLineUpQuantity,
+                                                      @RequestParam(value = "minimumTrainingsByWeek", defaultValue = "3") int minimumTrainingsByWeek)  {
 
-        return startingLineUpTeamService.getStartingLineUpPlayers(date);
+        return startingLineUpTeamService.getStartingLineUpPlayers(date, startingLineUpQuantity, minimumTrainingsByWeek);
     }
 }

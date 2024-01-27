@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface StartingLineUpTeamService {
 
-    List<StartingLineUp> getStartingLineUpPlayers(LocalDate week);
+    List<StartingLineUp> getStartingLineUpPlayers(LocalDate week, int startingLineUpQuantity, int minimumTrainingsByWeek);
 }

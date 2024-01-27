@@ -5,6 +5,8 @@ import com.bescobarres.football.application.service.TrainingPlayerService;
 import com.bescobarres.football.application.service.TrainingService;
 import com.bescobarres.football.domain.dto.Training;
 import com.bescobarres.football.domain.dto.TrainingPlayer;
+import com.bescobarres.football.domain.dto.input.TrainingInputDto;
+import com.bescobarres.football.infrastructure.mapper.TrainingMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,17 +16,20 @@ public class TrainingPlayerServiceImpl implements TrainingPlayerService {
 
     private final PlayerService playerService;
     private final TrainingService trainingService;
+    private final TrainingMapper trainingMapper;
 
-    public TrainingPlayerServiceImpl(PlayerService playerService, TrainingService trainingService) {
+    public TrainingPlayerServiceImpl(PlayerService playerService, TrainingService trainingService, TrainingMapper trainingMapper) {
         this.playerService = playerService;
         this.trainingService = trainingService;
+        this.trainingMapper = trainingMapper;
     }
 
     @Override
-    public TrainingPlayer proccess(TrainingPlayer trainingPlayer) {
-        ifPlayerNotExistCreate(trainingPlayer.getTrainings());
-        saveTraining(trainingPlayer.getTrainings());
-        return trainingPlayer;
+    public List<Training> proccess(List<TrainingInputDto> trainingsDto) {
+        List<Training> trainings =  trainingMapper.dtoToModel(trainingsDto);
+        ifPlayerNotExistCreate(trainings);
+        saveTraining(trainings);
+        return trainings;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class TrainingPlayerServiceImpl implements TrainingPlayerService {
     }
 
     private void ifPlayerNotExistCreate(List<Training> trainings) {
-        trainings.stream().filter(x -> x.getPlayer().getId() == null || x.getPlayer().getId() == 0 )
+        trainings
                 .forEach(training -> {
                 training.getPlayer().setId(
                         playerService.create(training.getPlayer()).getId());
