@@ -57,6 +57,7 @@ public class TrainingServiceTest {
                         .passes(20L)
                         .power(100D)
                         .time(50L).build())
+                .date(LocalDate.now())
                 .build();
 
         when(trainingRepository.save(trainingEntity)).thenReturn(trainingEntity);

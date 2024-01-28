@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -20,8 +19,6 @@ public class TrainingInputDto {
 
     private Long playerId;
 
-    @NotNull(message = "El campo name no debe ser NULL")
-    @NotEmpty(message = "El campo name no debe estar vacio")
     private String name;
 
     @DecimalMin(value = "0.1", message = "El campo power debe ser un valor mayor a 0")

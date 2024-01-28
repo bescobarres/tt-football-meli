@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PlayerServiceImpl  implements PlayerService {
+public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
     private final PlayerMapper playerMapper;
 
-    public PlayerServiceImpl(PlayerRepository playerRepository, PlayerMapper playerMapper){
+    public PlayerServiceImpl(PlayerRepository playerRepository, PlayerMapper playerMapper) {
         this.playerRepository = playerRepository;
         this.playerMapper = playerMapper;
     }
@@ -24,10 +24,10 @@ public class PlayerServiceImpl  implements PlayerService {
     @Override
     public PlayerDto create(PlayerDto player) {
         PlayerEntity playerEntity;
-        if(player.getId() != null){
+        if (player.getId() != null) {
             playerEntity = playerRepository.findById(player.getId())
                     .orElseThrow(() -> new ApiRequestException("Player with id: " + player.getId() + " doesn't exist"));
-        }else {
+        } else {
             playerEntity = playerRepository.save(playerMapper.modelToEntity(player));
         }
         return playerMapper.entityToModel(playerEntity);

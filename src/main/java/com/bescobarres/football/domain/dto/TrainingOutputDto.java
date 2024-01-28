@@ -18,7 +18,7 @@ public class TrainingOutputDto {
     private Long id;
     private PlayerDto player;
     private Stats stats;
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
 }

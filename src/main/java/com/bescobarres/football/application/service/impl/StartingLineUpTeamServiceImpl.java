@@ -38,15 +38,15 @@ public class StartingLineUpTeamServiceImpl implements StartingLineUpTeamService 
 
         List<PlayerDto> playersWithMinimumThreeTrainings = getPlayersWithMinimumThreeTrainings(trainingsByPlayer);
 
-        validateMinimumTrainings(playersWithMinimumThreeTrainings);
+        validateMinimumTrainingsAndPlayers(playersWithMinimumThreeTrainings, startingLineUpQuantity);
 
         List<StartingLineUp> scorePlayersAverage = getStartingLineUpsScoreAverage(trainingsByPlayer, playersWithMinimumThreeTrainings);
 
         return getPlayersWithBestScoreAverage(startingLineUpQuantity, scorePlayersAverage);
     }
 
-    private static void validateMinimumTrainings(List<PlayerDto> playersWithMinimumThreeTrainings) {
-        if (playersWithMinimumThreeTrainings.isEmpty()) {
+    private static void validateMinimumTrainingsAndPlayers(List<PlayerDto> playersWithMinimumThreeTrainings, int startingLineUpQuantity) {
+        if (playersWithMinimumThreeTrainings.isEmpty() || playersWithMinimumThreeTrainings.size() < startingLineUpQuantity) {
             throw new ApiRequestExceptionNotFound("No hay suficiente información");
         }
     }

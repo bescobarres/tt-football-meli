@@ -17,6 +17,7 @@ public class TrainingBuilder {
                                 .passes(20L)
                                 .power(100D)
                                 .time(50L).build())
+                        .date(LocalDate.now())
                         .build(),
                 TrainingOutputDto.builder()
                         .player(PlayerDto.builder().id(2L).name("Player 2").build())
@@ -139,7 +140,9 @@ public class TrainingBuilder {
                                 .distance(100D)
                                 .passes(20L)
                                 .power(100D)
-                                .time(50L).build())
+                                .time(50L)
+                                .build())
+                        .date(LocalDate.now())
                         .build(),
                 TrainingOutputDto.builder()
                         .player(PlayerDto.builder().id(2L).name("Player 2").build())

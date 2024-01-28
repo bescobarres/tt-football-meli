@@ -42,7 +42,7 @@ public class TrainingServiceImpl implements TrainingService {
         LocalDate lastDayOfWeek = dayOfWeek.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 
         return trainingMapper.entityToModel(
-        trainingRepository.findByDateBetween(initialDayOfWeek, lastDayOfWeek));
+                trainingRepository.findByDateBetween(initialDayOfWeek, lastDayOfWeek));
 
     }
 

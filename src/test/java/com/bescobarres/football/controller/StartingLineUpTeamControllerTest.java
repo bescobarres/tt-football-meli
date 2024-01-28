@@ -1,16 +1,10 @@
 package com.bescobarres.football.controller;
 
 import com.bescobarres.football.application.service.StartingLineUpTeamService;
-import com.bescobarres.football.application.service.TrainingPlayerService;
-import com.bescobarres.football.domain.dto.TrainingInputDto;
 import com.bescobarres.football.infrastructure.controller.StartingLineUpTeamController;
-import com.bescobarres.football.infrastructure.controller.TrainingPlayerController;
-import com.bescobarres.football.service.builder.TrainingBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +18,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @WebMvcTest(controllers = StartingLineUpTeamController.class)
 @AutoConfigureMockMvc(addFilters = false)
-@ExtendWith(MockitoExtension.class)public class StartingLineUpTeamControllerTest {
-
+@ExtendWith(MockitoExtension.class)
+public class StartingLineUpTeamControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
