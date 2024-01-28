@@ -1,0 +1,415 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TrainingMapperImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bescobarres.football.infrastructure.mapper</a>
+</div>
+
+<h1>Coverage Summary for Class: TrainingMapperImpl (com.bescobarres.football.infrastructure.mapper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrainingMapperImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.3%
+  </span>
+  <span class="absValue">
+    (1/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0.6%
+  </span>
+  <span class="absValue">
+    (1/162)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bescobarres.football.infrastructure.mapper;
+&nbsp;
+&nbsp;import com.bescobarres.football.domain.dto.PlayerDto;
+&nbsp;import com.bescobarres.football.domain.dto.TrainingInputDto;
+&nbsp;import com.bescobarres.football.domain.dto.TrainingOutputDto;
+&nbsp;import com.bescobarres.football.domain.entity.PlayerEntity;
+&nbsp;import com.bescobarres.football.domain.entity.TrainingEntity;
+&nbsp;import com.bescobarres.football.domain.model.Stats;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import javax.annotation.processing.Generated;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;@Generated(
+&nbsp;    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+&nbsp;    date = &quot;2024-01-28T10:12:42+1030&quot;,
+&nbsp;    comments = &quot;version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.5.jar, environment: Java 17.0.3 (Azul Systems, Inc.)&quot;
+&nbsp;)
+&nbsp;@Component
+<b class="fc">&nbsp;public class TrainingMapperImpl implements TrainingMapper {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TrainingEntity modelToEntity(TrainingOutputDto trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        TrainingEntity.TrainingEntityBuilder trainingEntity = TrainingEntity.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        if ( trainingOutputDto.getId() != null ) {</b>
+<b class="nc">&nbsp;            trainingEntity.id( trainingOutputDto.getId() );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Long id = trainingOutputDtoPlayerId( trainingOutputDto );</b>
+<b class="nc">&nbsp;        if ( id != null ) {</b>
+<b class="nc">&nbsp;            trainingEntity.playerId( id );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Double power = trainingOutputDtoStatsPower( trainingOutputDto );</b>
+<b class="nc">&nbsp;        if ( power != null ) {</b>
+<b class="nc">&nbsp;            trainingEntity.power( power );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Double distance = trainingOutputDtoStatsDistance( trainingOutputDto );</b>
+<b class="nc">&nbsp;        if ( distance != null ) {</b>
+<b class="nc">&nbsp;            trainingEntity.distance( distance );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Long time = trainingOutputDtoStatsTime( trainingOutputDto );</b>
+<b class="nc">&nbsp;        if ( time != null ) {</b>
+<b class="nc">&nbsp;            trainingEntity.time( time );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Long passes = trainingOutputDtoStatsPasses( trainingOutputDto );</b>
+<b class="nc">&nbsp;        if ( passes != null ) {</b>
+<b class="nc">&nbsp;            trainingEntity.passes( passes );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Double speed = trainingOutputDtoStatsSpeed( trainingOutputDto );</b>
+<b class="nc">&nbsp;        if ( speed != null ) {</b>
+<b class="nc">&nbsp;            trainingEntity.speed( speed );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Double score = trainingOutputDtoStatsScore( trainingOutputDto );</b>
+<b class="nc">&nbsp;        if ( score != null ) {</b>
+<b class="nc">&nbsp;            trainingEntity.score( score );</b>
+&nbsp;        }
+<b class="nc">&nbsp;        trainingEntity.date( trainingOutputDto.getDate() );</b>
+<b class="nc">&nbsp;        trainingEntity.player( playerDtoToPlayerEntity( trainingOutputDto.getPlayer() ) );</b>
+&nbsp;
+<b class="nc">&nbsp;        return trainingEntity.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TrainingOutputDto entityToModel(TrainingEntity training) {
+<b class="nc">&nbsp;        if ( training == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        TrainingOutputDto.TrainingOutputDtoBuilder trainingOutputDto = TrainingOutputDto.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        trainingOutputDto.player( trainingEntityToPlayerDto( training ) );</b>
+<b class="nc">&nbsp;        trainingOutputDto.stats( trainingEntityToStats( training ) );</b>
+<b class="nc">&nbsp;        trainingOutputDto.id( training.getId() );</b>
+<b class="nc">&nbsp;        trainingOutputDto.date( training.getDate() );</b>
+&nbsp;
+<b class="nc">&nbsp;        return trainingOutputDto.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;TrainingEntity&gt; modelToEntity(List&lt;TrainingOutputDto&gt; trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;TrainingEntity&gt; list = new ArrayList&lt;TrainingEntity&gt;( trainingOutputDto.size() );</b>
+<b class="nc">&nbsp;        for ( TrainingOutputDto trainingOutputDto1 : trainingOutputDto ) {</b>
+<b class="nc">&nbsp;            list.add( modelToEntity( trainingOutputDto1 ) );</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;TrainingOutputDto&gt; entityToModel(List&lt;TrainingEntity&gt; training) {
+<b class="nc">&nbsp;        if ( training == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;TrainingOutputDto&gt; list = new ArrayList&lt;TrainingOutputDto&gt;( training.size() );</b>
+<b class="nc">&nbsp;        for ( TrainingEntity trainingEntity : training ) {</b>
+<b class="nc">&nbsp;            list.add( entityToModel( trainingEntity ) );</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public TrainingOutputDto dtoToModel(TrainingInputDto trainingDto) {
+<b class="nc">&nbsp;        if ( trainingDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        TrainingOutputDto.TrainingOutputDtoBuilder trainingOutputDto = TrainingOutputDto.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        trainingOutputDto.player( trainingInputDtoToPlayerDto( trainingDto ) );</b>
+<b class="nc">&nbsp;        trainingOutputDto.stats( trainingInputDtoToStats( trainingDto ) );</b>
+<b class="nc">&nbsp;        trainingOutputDto.date( trainingDto.getDate() );</b>
+&nbsp;
+<b class="nc">&nbsp;        return trainingOutputDto.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;TrainingOutputDto&gt; dtoToModel(List&lt;TrainingInputDto&gt; trainingsDto) {
+<b class="nc">&nbsp;        if ( trainingsDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;TrainingOutputDto&gt; list = new ArrayList&lt;TrainingOutputDto&gt;( trainingsDto.size() );</b>
+<b class="nc">&nbsp;        for ( TrainingInputDto trainingInputDto : trainingsDto ) {</b>
+<b class="nc">&nbsp;            list.add( dtoToModel( trainingInputDto ) );</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Long trainingOutputDtoPlayerId(TrainingOutputDto trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        PlayerDto player = trainingOutputDto.getPlayer();</b>
+<b class="nc">&nbsp;        if ( player == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Long id = player.getId();</b>
+<b class="nc">&nbsp;        if ( id == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Double trainingOutputDtoStatsPower(TrainingOutputDto trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Stats stats = trainingOutputDto.getStats();</b>
+<b class="nc">&nbsp;        if ( stats == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Double power = stats.getPower();</b>
+<b class="nc">&nbsp;        if ( power == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return power;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Double trainingOutputDtoStatsDistance(TrainingOutputDto trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Stats stats = trainingOutputDto.getStats();</b>
+<b class="nc">&nbsp;        if ( stats == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Double distance = stats.getDistance();</b>
+<b class="nc">&nbsp;        if ( distance == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return distance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Long trainingOutputDtoStatsTime(TrainingOutputDto trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Stats stats = trainingOutputDto.getStats();</b>
+<b class="nc">&nbsp;        if ( stats == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Long time = stats.getTime();</b>
+<b class="nc">&nbsp;        if ( time == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return time;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Long trainingOutputDtoStatsPasses(TrainingOutputDto trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Stats stats = trainingOutputDto.getStats();</b>
+<b class="nc">&nbsp;        if ( stats == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Long passes = stats.getPasses();</b>
+<b class="nc">&nbsp;        if ( passes == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return passes;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Double trainingOutputDtoStatsSpeed(TrainingOutputDto trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Stats stats = trainingOutputDto.getStats();</b>
+<b class="nc">&nbsp;        if ( stats == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Double speed = stats.getSpeed();</b>
+<b class="nc">&nbsp;        if ( speed == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return speed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Double trainingOutputDtoStatsScore(TrainingOutputDto trainingOutputDto) {
+<b class="nc">&nbsp;        if ( trainingOutputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Stats stats = trainingOutputDto.getStats();</b>
+<b class="nc">&nbsp;        if ( stats == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Double score = stats.getScore();</b>
+<b class="nc">&nbsp;        if ( score == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return score;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PlayerEntity playerDtoToPlayerEntity(PlayerDto playerDto) {
+<b class="nc">&nbsp;        if ( playerDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        PlayerEntity.PlayerEntityBuilder playerEntity = PlayerEntity.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        playerEntity.id( playerDto.getId() );</b>
+<b class="nc">&nbsp;        playerEntity.name( playerDto.getName() );</b>
+&nbsp;
+<b class="nc">&nbsp;        return playerEntity.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PlayerDto trainingEntityToPlayerDto(TrainingEntity trainingEntity) {
+<b class="nc">&nbsp;        if ( trainingEntity == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        PlayerDto.PlayerDtoBuilder playerDto = PlayerDto.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        playerDto.id( trainingEntity.getPlayerId() );</b>
+&nbsp;
+<b class="nc">&nbsp;        return playerDto.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Stats trainingEntityToStats(TrainingEntity trainingEntity) {
+<b class="nc">&nbsp;        if ( trainingEntity == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Stats.StatsBuilder stats = Stats.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        stats.power( trainingEntity.getPower() );</b>
+<b class="nc">&nbsp;        stats.distance( trainingEntity.getDistance() );</b>
+<b class="nc">&nbsp;        stats.passes( trainingEntity.getPasses() );</b>
+<b class="nc">&nbsp;        stats.time( trainingEntity.getTime() );</b>
+&nbsp;
+<b class="nc">&nbsp;        return stats.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected PlayerDto trainingInputDtoToPlayerDto(TrainingInputDto trainingInputDto) {
+<b class="nc">&nbsp;        if ( trainingInputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        PlayerDto.PlayerDtoBuilder playerDto = PlayerDto.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        playerDto.id( trainingInputDto.getPlayerId() );</b>
+<b class="nc">&nbsp;        playerDto.name( trainingInputDto.getName() );</b>
+&nbsp;
+<b class="nc">&nbsp;        return playerDto.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Stats trainingInputDtoToStats(TrainingInputDto trainingInputDto) {
+<b class="nc">&nbsp;        if ( trainingInputDto == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Stats.StatsBuilder stats = Stats.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        stats.power( trainingInputDto.getPower() );</b>
+<b class="nc">&nbsp;        stats.distance( trainingInputDto.getDistance() );</b>
+<b class="nc">&nbsp;        stats.time( trainingInputDto.getTime() );</b>
+<b class="nc">&nbsp;        stats.passes( trainingInputDto.getPasses() );</b>
+&nbsp;
+<b class="nc">&nbsp;        return stats.build();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-28 17:26</div>
+</div>
+</body>
+</html>

@@ -1,10 +1,8 @@
 package com.bescobarres.football.infrastructure.mapper;
 
-import com.bescobarres.football.domain.dto.Training;
-import com.bescobarres.football.domain.dto.input.TrainingInputDto;
-import com.bescobarres.football.domain.entity.PlayerEntity;
+import com.bescobarres.football.domain.dto.TrainingOutputDto;
+import com.bescobarres.football.domain.dto.TrainingInputDto;
 import com.bescobarres.football.domain.entity.TrainingEntity;
-import com.bescobarres.football.domain.model.Player;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -24,7 +22,7 @@ public interface TrainingMapper {
             @Mapping(source = "stats.score", target = "score"),
             @Mapping(source = "date", target = "date")
     })
-    TrainingEntity modelToEntity(Training training);
+    TrainingEntity modelToEntity(TrainingOutputDto trainingOutputDto);
 
 
     @Mappings({
@@ -36,12 +34,12 @@ public interface TrainingMapper {
             @Mapping(source = "time", target = "stats.time"),
             @Mapping(source = "date", target = "date"),
     })
-    Training entityToModel(TrainingEntity training);
+    TrainingOutputDto entityToModel(TrainingEntity training);
 
-    List<TrainingEntity> modelToEntity(List<Training> training);
+    List<TrainingEntity> modelToEntity(List<TrainingOutputDto> trainingOutputDto);
 
 
-    List<Training> entityToModel(List<TrainingEntity> training);
+    List<TrainingOutputDto> entityToModel(List<TrainingEntity> training);
 
     @Mappings({
             @Mapping(source = "playerId", target = "player.id"),
@@ -52,8 +50,8 @@ public interface TrainingMapper {
             @Mapping(source = "passes", target = "stats.passes"),
             @Mapping(source = "date", target = "date"),
     })
-    Training dtoToModel(TrainingInputDto trainingDto);
+    TrainingOutputDto dtoToModel(TrainingInputDto trainingDto);
 
-    List<Training> dtoToModel(List<TrainingInputDto> trainingsDto);
+    List<TrainingOutputDto> dtoToModel(List<TrainingInputDto> trainingsDto);
 
 }

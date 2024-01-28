@@ -1,8 +1,10 @@
 package com.bescobarres.football.infrastructure.mapper;
 
+import com.bescobarres.football.domain.dto.PlayerDto;
 import com.bescobarres.football.domain.entity.PlayerEntity;
-import com.bescobarres.football.domain.model.Player;
 import org.mapstruct.Mapper;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PlayerMapper {
@@ -11,8 +13,11 @@ public interface PlayerMapper {
 //            @Mapping(source = "id", target = "id"),
 //            @Mapping(source = "name", target = "name")
 //    })
-    PlayerEntity modelToEntity(Player player);
+    PlayerEntity modelToEntity(PlayerDto player);
 
 
-    Player entityToModel(PlayerEntity player);
+    PlayerDto entityToModel(PlayerEntity player);
+
+
+    List<PlayerDto> entityToModel(List<PlayerEntity> players);
 }

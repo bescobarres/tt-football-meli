@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > StartingLineUpTeamServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bescobarres.football.application.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: StartingLineUpTeamServiceImpl (com.bescobarres.football.application.service.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StartingLineUpTeamServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (33/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bescobarres.football.application.service.impl;
+&nbsp;
+&nbsp;import com.bescobarres.football.application.service.PlayerService;
+&nbsp;import com.bescobarres.football.application.service.StartingLineUpTeamService;
+&nbsp;import com.bescobarres.football.application.service.TrainingService;
+&nbsp;import com.bescobarres.football.domain.dto.PlayerDto;
+&nbsp;import com.bescobarres.football.domain.dto.TrainingOutputDto;
+&nbsp;import com.bescobarres.football.domain.exception.ApiRequestExceptionNotFound;
+&nbsp;import com.bescobarres.football.domain.model.StartingLineUp;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class StartingLineUpTeamServiceImpl implements StartingLineUpTeamService {
+&nbsp;
+&nbsp;    private static final int MINIMUM_QUANTITY_TRAINING_BY_WEEK = 3;
+&nbsp;
+&nbsp;    private final TrainingService trainingService;
+&nbsp;
+&nbsp;    private final PlayerService playerService;
+&nbsp;
+<b class="fc">&nbsp;    public StartingLineUpTeamServiceImpl(TrainingService trainingService, PlayerService playerService) {</b>
+<b class="fc">&nbsp;        this.trainingService = trainingService;</b>
+<b class="fc">&nbsp;        this.playerService = playerService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;StartingLineUp&gt; getStartingLineUpPlayers(LocalDate day, int startingLineUpQuantity) {
+&nbsp;
+<b class="fc">&nbsp;        List&lt;TrainingOutputDto&gt; trainingsOutputDto = trainingService.getTrainingsByWeek(day);</b>
+&nbsp;
+<b class="fc">&nbsp;        Map&lt;PlayerDto, List&lt;TrainingOutputDto&gt;&gt; trainingsByPlayer = getTrainingsByPlayerListMap(trainingsOutputDto);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;PlayerDto&gt; playersWithMinimumThreeTrainings = getPlayersWithMinimumThreeTrainings(trainingsByPlayer);</b>
+&nbsp;
+<b class="fc">&nbsp;        validateMinimumTrainings(playersWithMinimumThreeTrainings);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;StartingLineUp&gt; scorePlayersAverage = getStartingLineUpsScoreAverage(trainingsByPlayer, playersWithMinimumThreeTrainings);</b>
+&nbsp;
+<b class="fc">&nbsp;        return getPlayersWithBestScoreAverage(startingLineUpQuantity, scorePlayersAverage);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void validateMinimumTrainings(List&lt;PlayerDto&gt; playersWithMinimumThreeTrainings) {
+<b class="fc">&nbsp;        if (playersWithMinimumThreeTrainings.isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new ApiRequestExceptionNotFound(&quot;No hay suficiente información&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;StartingLineUp&gt; getPlayersWithBestScoreAverage(int startingLineUpQuantity, List&lt;StartingLineUp&gt; scorePlayersAverage) {
+<b class="fc">&nbsp;        List&lt;Long&gt; playersId = scorePlayersAverage.stream()</b>
+<b class="fc">&nbsp;                .map(x -&gt; x.getPlayer().getId()).toList();</b>
+&nbsp;
+<b class="fc">&nbsp;        playerService.getPlayersBy(playersId).forEach(player -&gt; {</b>
+<b class="nc">&nbsp;            scorePlayersAverage.stream().filter(x -&gt; x.getPlayer().getId().equals(player.getId()))</b>
+<b class="nc">&nbsp;                    .findFirst().ifPresent(x -&gt; {</b>
+<b class="nc">&nbsp;                        x.getPlayer().setName(player.getName());</b>
+&nbsp;                    });
+&nbsp;        });
+&nbsp;
+<b class="fc">&nbsp;        return scorePlayersAverage.stream()</b>
+<b class="fc">&nbsp;                .sorted(Comparator.comparingDouble(StartingLineUp::getScore).reversed())</b>
+<b class="fc">&nbsp;                .limit(startingLineUpQuantity)</b>
+<b class="fc">&nbsp;                .toList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static List&lt;StartingLineUp&gt; getStartingLineUpsScoreAverage(Map&lt;PlayerDto, List&lt;TrainingOutputDto&gt;&gt; trainingsByPlayer, List&lt;PlayerDto&gt; playersWithMinimumThreeTrainings) {
+<b class="fc">&nbsp;        return playersWithMinimumThreeTrainings.stream()</b>
+<b class="fc">&nbsp;                .map(player -&gt; {</b>
+<b class="fc">&nbsp;                    List&lt;TrainingOutputDto&gt; trainingsPlayer = trainingsByPlayer.get(player);</b>
+<b class="fc">&nbsp;                    double scoreAverage = trainingsPlayer.stream()</b>
+<b class="fc">&nbsp;                            .mapToDouble(x -&gt; x.getStats().getScore())</b>
+<b class="fc">&nbsp;                            .average()</b>
+<b class="fc">&nbsp;                            .orElse(0);</b>
+<b class="fc">&nbsp;                    return new StartingLineUp(player, scoreAverage);</b>
+&nbsp;                })
+<b class="fc">&nbsp;                .toList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static List&lt;PlayerDto&gt; getPlayersWithMinimumThreeTrainings(Map&lt;PlayerDto, List&lt;TrainingOutputDto&gt;&gt; trainingsByPlayer) {
+<b class="fc">&nbsp;        return trainingsByPlayer.entrySet().stream()</b>
+<b class="fc">&nbsp;                .filter(entry -&gt; entry.getValue().size() &gt;= MINIMUM_QUANTITY_TRAINING_BY_WEEK)</b>
+<b class="fc">&nbsp;                .map(Map.Entry::getKey)</b>
+<b class="fc">&nbsp;                .toList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Map&lt;PlayerDto, List&lt;TrainingOutputDto&gt;&gt; getTrainingsByPlayerListMap(List&lt;TrainingOutputDto&gt; trainingsOutputDto) {
+<b class="fc">&nbsp;        return trainingsOutputDto.stream()</b>
+<b class="fc">&nbsp;                .collect(Collectors.groupingBy(TrainingOutputDto::getPlayer));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-28 17:26</div>
+</div>
+</body>
+</html>

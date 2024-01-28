@@ -3,9 +3,8 @@ package com.bescobarres.football.application.service.impl;
 import com.bescobarres.football.application.service.PlayerService;
 import com.bescobarres.football.application.service.TrainingPlayerService;
 import com.bescobarres.football.application.service.TrainingService;
-import com.bescobarres.football.domain.dto.Training;
-import com.bescobarres.football.domain.dto.TrainingPlayer;
-import com.bescobarres.football.domain.dto.input.TrainingInputDto;
+import com.bescobarres.football.domain.dto.TrainingOutputDto;
+import com.bescobarres.football.domain.dto.TrainingInputDto;
 import com.bescobarres.football.infrastructure.mapper.TrainingMapper;
 import org.springframework.stereotype.Service;
 
@@ -25,26 +24,15 @@ public class TrainingPlayerServiceImpl implements TrainingPlayerService {
     }
 
     @Override
-    public List<Training> proccess(List<TrainingInputDto> trainingsDto) {
-        List<Training> trainings =  trainingMapper.dtoToModel(trainingsDto);
-        ifPlayerNotExistCreate(trainings);
-        saveTraining(trainings);
-        return trainings;
+    public List<TrainingOutputDto> proccess(List<TrainingInputDto> trainingsDto) {
+        List<TrainingOutputDto> trainingsOutputDto =  trainingMapper.dtoToModel(trainingsDto);
+        savePlayers(trainingsOutputDto);
+        trainingService.saveTrainings(trainingsOutputDto);
+        return trainingsOutputDto;
     }
 
-    @Override
-    public TrainingPlayer calculate(TrainingPlayer trainingPlayer) {
-        return null;
-    }
-
-    private void saveTraining(List<Training> trainings) {
-        trainings.forEach(training -> {
-            training.setId(trainingService.create(training).getId());
-        });
-    }
-
-    private void ifPlayerNotExistCreate(List<Training> trainings) {
-        trainings
+    private void savePlayers(List<TrainingOutputDto> trainingsOutputDto) {
+        trainingsOutputDto
                 .forEach(training -> {
                 training.getPlayer().setId(
                         playerService.create(training.getPlayer()).getId());

@@ -1,0 +1,91 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TrainingService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bescobarres.football.application.service</a>
+</div>
+
+<h1>Coverage Summary for Class: TrainingService (com.bescobarres.football.application.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">TrainingService$MockitoMock$AEU6Bzky</td>
+  </tr>
+  <tr>
+    <td class="name">TrainingService$MockitoMock$AEU6Bzky$auxiliary$4BD1W6WL</td>
+  </tr>
+  <tr>
+    <td class="name">TrainingService$MockitoMock$AEU6Bzky$auxiliary$tTpMoSG0</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bescobarres.football.application.service;
+&nbsp;
+&nbsp;import com.bescobarres.football.domain.dto.TrainingOutputDto;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public interface TrainingService {
+&nbsp;
+&nbsp;    TrainingOutputDto create(TrainingOutputDto trainingOutputDto);
+&nbsp;
+&nbsp;    void saveTrainings(List&lt;TrainingOutputDto&gt; trainingsOutputDto);
+&nbsp;
+&nbsp;    List&lt;TrainingOutputDto&gt; getTrainingsByWeek(LocalDate week);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-28 17:26</div>
+</div>
+</body>
+</html>

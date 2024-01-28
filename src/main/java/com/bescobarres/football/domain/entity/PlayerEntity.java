@@ -16,14 +16,7 @@ public class PlayerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
-//    @JoinColumn(name = "teamId", insertable = false, updatable = false)
-//    @ManyToOne(targetEntity = TeamEntity.class, fetch = FetchType.EAGER)
-//    private Team team;
-//
-//    @Column(name = "teamId")
-//    private int teamId;
+    private Long id;
 
     @Column
     private String name;

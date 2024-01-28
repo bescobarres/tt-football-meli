@@ -1,13 +1,15 @@
 package com.bescobarres.football.application.service;
 
-import com.bescobarres.football.domain.dto.Training;
+import com.bescobarres.football.domain.dto.TrainingOutputDto;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface TrainingService {
 
-    Training create(Training training);
+    TrainingOutputDto create(TrainingOutputDto trainingOutputDto);
 
-    List<Training> getTrainingsBy(LocalDate week);
+    void saveTrainings(List<TrainingOutputDto> trainingsOutputDto);
+
+    List<TrainingOutputDto> getTrainingsByWeek(LocalDate week);
 }

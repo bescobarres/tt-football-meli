@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TrainingMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bescobarres.football.infrastructure.mapper</a>
+</div>
+
+<h1>Coverage Summary for Class: TrainingMapper (com.bescobarres.football.infrastructure.mapper)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">TrainingMapper$MockitoMock$6GykVa99</td>
+  </tr>
+  <tr>
+    <td class="name">TrainingMapper$MockitoMock$6GykVa99$auxiliary$3WxaehO6</td>
+  </tr>
+  <tr>
+    <td class="name">TrainingMapper$MockitoMock$6GykVa99$auxiliary$PFyZSPtT</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bescobarres.football.infrastructure.mapper;
+&nbsp;
+&nbsp;import com.bescobarres.football.domain.dto.TrainingOutputDto;
+&nbsp;import com.bescobarres.football.domain.dto.TrainingInputDto;
+&nbsp;import com.bescobarres.football.domain.entity.TrainingEntity;
+&nbsp;import org.mapstruct.Mapper;
+&nbsp;import org.mapstruct.Mapping;
+&nbsp;import org.mapstruct.Mappings;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Mapper(componentModel = &quot;spring&quot;)
+&nbsp;public interface TrainingMapper {
+&nbsp;    @Mappings({
+&nbsp;            @Mapping(source = &quot;id&quot;, target = &quot;id&quot;),
+&nbsp;            @Mapping(source = &quot;player.id&quot;, target = &quot;playerId&quot;),
+&nbsp;            @Mapping(source = &quot;stats.power&quot;, target = &quot;power&quot;),
+&nbsp;            @Mapping(source = &quot;stats.distance&quot;, target = &quot;distance&quot;),
+&nbsp;            @Mapping(source = &quot;stats.time&quot;, target = &quot;time&quot;),
+&nbsp;            @Mapping(source = &quot;stats.passes&quot;, target = &quot;passes&quot;),
+&nbsp;            @Mapping(source = &quot;stats.speed&quot;, target = &quot;speed&quot;),
+&nbsp;            @Mapping(source = &quot;stats.score&quot;, target = &quot;score&quot;),
+&nbsp;            @Mapping(source = &quot;date&quot;, target = &quot;date&quot;)
+&nbsp;    })
+&nbsp;    TrainingEntity modelToEntity(TrainingOutputDto trainingOutputDto);
+&nbsp;
+&nbsp;
+&nbsp;    @Mappings({
+&nbsp;            @Mapping(source = &quot;id&quot;, target = &quot;id&quot;),
+&nbsp;            @Mapping(source = &quot;playerId&quot;, target = &quot;player.id&quot;),
+&nbsp;            @Mapping(source = &quot;power&quot;, target = &quot;stats.power&quot;),
+&nbsp;            @Mapping(source = &quot;distance&quot;, target = &quot;stats.distance&quot;),
+&nbsp;            @Mapping(source = &quot;passes&quot;, target = &quot;stats.passes&quot;),
+&nbsp;            @Mapping(source = &quot;time&quot;, target = &quot;stats.time&quot;),
+&nbsp;            @Mapping(source = &quot;date&quot;, target = &quot;date&quot;),
+&nbsp;    })
+&nbsp;    TrainingOutputDto entityToModel(TrainingEntity training);
+&nbsp;
+&nbsp;    List&lt;TrainingEntity&gt; modelToEntity(List&lt;TrainingOutputDto&gt; trainingOutputDto);
+&nbsp;
+&nbsp;
+&nbsp;    List&lt;TrainingOutputDto&gt; entityToModel(List&lt;TrainingEntity&gt; training);
+&nbsp;
+&nbsp;    @Mappings({
+&nbsp;            @Mapping(source = &quot;playerId&quot;, target = &quot;player.id&quot;),
+&nbsp;            @Mapping(source = &quot;name&quot;, target = &quot;player.name&quot;),
+&nbsp;            @Mapping(source = &quot;power&quot;, target = &quot;stats.power&quot;),
+&nbsp;            @Mapping(source = &quot;distance&quot;, target = &quot;stats.distance&quot;),
+&nbsp;            @Mapping(source = &quot;time&quot;, target = &quot;stats.time&quot;),
+&nbsp;            @Mapping(source = &quot;passes&quot;, target = &quot;stats.passes&quot;),
+&nbsp;            @Mapping(source = &quot;date&quot;, target = &quot;date&quot;),
+&nbsp;    })
+&nbsp;    TrainingOutputDto dtoToModel(TrainingInputDto trainingDto);
+&nbsp;
+&nbsp;    List&lt;TrainingOutputDto&gt; dtoToModel(List&lt;TrainingInputDto&gt; trainingsDto);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-28 17:26</div>
+</div>
+</body>
+</html>

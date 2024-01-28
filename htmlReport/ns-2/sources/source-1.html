@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PlayerServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bescobarres.football.application.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: PlayerServiceImpl (com.bescobarres.football.application.service.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlayerServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bescobarres.football.application.service.impl;
+&nbsp;
+&nbsp;import com.bescobarres.football.application.service.PlayerService;
+&nbsp;import com.bescobarres.football.domain.dto.PlayerDto;
+&nbsp;import com.bescobarres.football.domain.entity.PlayerEntity;
+&nbsp;import com.bescobarres.football.domain.exception.ApiRequestException;
+&nbsp;import com.bescobarres.football.infrastructure.mapper.PlayerMapper;
+&nbsp;import com.bescobarres.football.infrastructure.repository.PlayerRepository;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class PlayerServiceImpl  implements PlayerService {
+&nbsp;
+&nbsp;    private final PlayerRepository playerRepository;
+&nbsp;    private final PlayerMapper playerMapper;
+&nbsp;
+<b class="fc">&nbsp;    public PlayerServiceImpl(PlayerRepository playerRepository, PlayerMapper playerMapper){</b>
+<b class="fc">&nbsp;        this.playerRepository = playerRepository;</b>
+<b class="fc">&nbsp;        this.playerMapper = playerMapper;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public PlayerDto create(PlayerDto player) {
+&nbsp;        PlayerEntity playerEntity;
+<b class="fc">&nbsp;        if(player.getId() != null){</b>
+<b class="fc">&nbsp;            playerEntity = playerRepository.findById(player.getId())</b>
+<b class="fc">&nbsp;                    .orElseThrow(() -&gt; new ApiRequestException(&quot;Player with id: &quot; + player.getId() + &quot; doesn&#39;t exist&quot;));</b>
+&nbsp;        }else {
+<b class="fc">&nbsp;            playerEntity = playerRepository.save(playerMapper.modelToEntity(player));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return playerMapper.entityToModel(playerEntity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;PlayerDto&gt; getPlayersBy(List&lt;Long&gt; players) {
+<b class="fc">&nbsp;        return playerMapper.entityToModel(playerRepository.findAllByIdIn(players));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-28 17:26</div>
+</div>
+</body>
+</html>

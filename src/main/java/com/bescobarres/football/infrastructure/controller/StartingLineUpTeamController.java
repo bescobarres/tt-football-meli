@@ -19,10 +19,9 @@ public class StartingLineUpTeamController {
     }
 
     @GetMapping("/team")
-    public List<StartingLineUp> getStartingLineUpTeam(@RequestParam(value = "date", defaultValue = "#{T(java.time.LocalDate).now()}") LocalDate date,
-                                                      @RequestParam(value = "startingLineUpQuantity", defaultValue = "5") int startingLineUpQuantity,
-                                                      @RequestParam(value = "minimumTrainingsByWeek", defaultValue = "3") int minimumTrainingsByWeek)  {
+    public List<StartingLineUp> getStartingLineUpTeam(@RequestParam(value = "day", defaultValue = "#{T(java.time.LocalDate).now()}") LocalDate day,
+                                                      @RequestParam(value = "startingLineUpQuantity", defaultValue = "5") int startingLineUpQuantity)  {
 
-        return startingLineUpTeamService.getStartingLineUpPlayers(date, startingLineUpQuantity, minimumTrainingsByWeek);
+        return startingLineUpTeamService.getStartingLineUpPlayers(day, startingLineUpQuantity);
     }
 }
