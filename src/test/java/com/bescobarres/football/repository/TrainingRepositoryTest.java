@@ -57,6 +57,7 @@ public class TrainingRepositoryTest {
         Double expectedSpeed = trainingEntity.getSpeed();
         Long expectedPasses = trainingEntity.getPasses();
         Long expectedTime = trainingEntity.getTime();
+        LocalDate expectedDate = trainingEntity.getDate();
 
         //Act
         TrainingEntity trainingEntitySaved = trainingRepository.save(trainingEntity);
@@ -70,6 +71,7 @@ public class TrainingRepositoryTest {
         Assertions.assertEquals(expectedPasses, trainingEntitySaved.getPasses());
         Assertions.assertEquals(expectedPasses, trainingEntitySaved.getPasses());
         Assertions.assertEquals(expectedTime, trainingEntitySaved.getTime());
+        Assertions.assertEquals(expectedDate, trainingEntitySaved.getDate());
     }
 
 }

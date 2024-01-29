@@ -10,22 +10,25 @@ import java.util.List;
 
 public class TrainingBuilder {
     public static List<TrainingOutputDto> getBuildThreeTrainingsByFivePlayer() {
+
+        Stats stats = Stats.builder().build();
+        stats.setDistance(100D);
+        stats.setTime(50L);
+        stats.setPasses(4L);
+        stats.setPower(30D);
+
         return List.of(TrainingOutputDto.builder()
                         .player(PlayerDto.builder().id(1L).name("Player 1").build())
-                        .stats(Stats.builder()
-                                .distance(100D)
-                                .passes(20L)
-                                .power(100D)
-                                .time(50L).build())
+                        .stats(stats)
                         .date(LocalDate.now())
                         .build(),
                 TrainingOutputDto.builder()
                         .player(PlayerDto.builder().id(2L).name("Player 2").build())
                         .stats(Stats.builder()
-                                .distance(100D)
-                                .passes(20L)
-                                .power(100D)
-                                .time(50L).build())
+                                .distance(stats.getDistance())
+                                .passes(stats.getPasses())
+                                .power(stats.getPower())
+                                .time(stats.getTime()).build())
                         .build(),
                 TrainingOutputDto.builder()
                         .player(PlayerDto.builder().id(3L).name("Player 3").build())

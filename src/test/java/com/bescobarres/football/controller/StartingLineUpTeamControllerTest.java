@@ -39,7 +39,7 @@ public class StartingLineUpTeamControllerTest {
     @Test
     public void StartingLineUpTeamController_GetStartingLineUpTeam_ReturnThereIsNotEnoughInformation() throws Exception {
 
-        given(startingLineUpTeamService.getStartingLineUpPlayers(LocalDate.now(), 1))
+        given(startingLineUpTeamService.getStartingLineUpPlayers(LocalDate.now(), 3))
                 .willAnswer(InvocationOnMock::getArguments);
 
         ResultActions response = mockMvc.perform(get("/team")

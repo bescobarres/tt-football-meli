@@ -56,13 +56,24 @@ que incluyen tener al menos 3 entrenamientos por semana.
       "date": "2024-01-28"
     }'
 
+- **Endpoint:** `GET /team`
+- **Ejemplo de solicitud con curl:**
+-  Este endpoint puede recibir opcionalmente 2 parametros 'http://localhost:8080/team?startingLineUpQuantity=8&day=2024-01-26'
+- **startingLineUpQuantity** Recibe un numero entero que parametriza la cantidad de equipo principal que desea calcular
+- **day** Recibe una fecha de la semana que queremos calcular el equipo principal
+  ```bash
+  curl -X 'GET' \
+    'http://localhost:8080/team' \
+    -H 'accept: */*' \
+    -H 'Content-Type: application/json' \
+
 
 ## Detalles Adicionales
 
 - La aplicación fue desarrollada con Java 17 y Spring Boot 3.2.2.
 - Se utilizan dos tablas en la base de datos para cumplir con los requisitos de la aplicación.
 - Se implementaron librerías como MapStruct para mapear datos entre DTO y entidades, Lombok para reducir boilerplate, y OpenAPI para generar la documentación Swagger UI.
-- Las pruebas unitarias se realizaron con JUnit 5, alcanzando una cobertura del 82%.
+- Las pruebas unitarias se realizaron con JUnit 5, alcanzando una cobertura del 86%.
 - El proyecto utiliza Gradle como sistema de construcción.
 
 ...

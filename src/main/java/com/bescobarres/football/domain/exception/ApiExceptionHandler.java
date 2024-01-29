@@ -12,8 +12,7 @@ import java.time.ZonedDateTime;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(value = {ApiRequestException.class})
-    public ResponseEntity<Object> handleApiRequestException(ApiRequestException e){
-        // 1. Create Payload containing exception details
+    public ResponseEntity<Object> handleApiRequestException(RuntimeException e){
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
         ApiException apiException = new ApiException(
                 e.getMessage(),
@@ -21,7 +20,6 @@ public class ApiExceptionHandler {
                 ZonedDateTime.now(ZoneId.of("Z"))
 
         );
-        // 2. Return response entity
         return new ResponseEntity<>(apiException, badRequest);
 
     }
@@ -34,7 +32,6 @@ public class ApiExceptionHandler {
                 ZonedDateTime.now(ZoneId.of("Z"))
 
         );
-        // 2. Return response entity
         return new ResponseEntity<>(apiException, notFound);
 
     }

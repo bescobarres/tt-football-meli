@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class FootballApplicationTests {
 
 	@Test
-	void contextLoads() {
+	public void main() {
+		FootballApplication.main(new String[] {});
 	}
 
 }

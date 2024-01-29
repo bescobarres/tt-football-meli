@@ -30,28 +30,23 @@ public class PlayerRepositoryTest {
 
     @Test
     public void PlayerRepository_findPlayerById_ReturnPlayer(){
-        //Arrange
+
         Long playerId = playerEntity.getId();
         String expectedName = playerEntity.getName();
 
-        //Act
         PlayerEntity playerEntityTest = playerRepository.findById(playerId).orElse(null);
 
-        //Assert
         assert playerEntityTest != null;
         Assertions.assertEquals(expectedName, playerEntityTest.getName());
     }
 
     @Test
     public void PlayerRepository_findPlayerByIdIn_ReturnPlayers(){
-        //Arrange
         Long playerId = playerEntity.getId();
         String expectedName = playerEntity.getName();
 
-        //Act
         List<PlayerEntity> playerEntityTest = playerRepository.findAllByIdIn(List.of(playerId));
 
-        //Assert
         assert playerEntityTest != null;
         Assertions.assertFalse(playerEntityTest.isEmpty());
         Assertions.assertEquals(expectedName, Objects.requireNonNull(playerEntityTest
