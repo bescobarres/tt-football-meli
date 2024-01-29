@@ -76,8 +76,9 @@ que incluyen tener al menos 3 entrenamientos por semana.
 - Las pruebas unitarias se realizaron con JUnit 5, alcanzando una cobertura del 86%.
 - El proyecto utiliza Gradle como sistema de construcción.
 
-...
-
+## Despliegue en Cloud
+- La aplicacion esta desplegada en GCP en el dominio http://double-insight-412703.uw.r.appspot.com
+- Pueden acceder al swagger con la siguiente direccion: http://double-insight-412703.uw.r.appspot.com/swagger-ui/index.htm
 
 
 

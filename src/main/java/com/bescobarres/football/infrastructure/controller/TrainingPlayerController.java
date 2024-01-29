@@ -6,6 +6,7 @@ import com.bescobarres.football.domain.dto.TrainingInputDto;
 import com.bescobarres.football.domain.exception.ApiRequestException;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,11 +29,13 @@ public class TrainingPlayerController {
             description = "API to save players and trainings"
     )
     @PostMapping("/training")
-    public List<TrainingOutputDto> createTrainingAndPlayer(@Valid @RequestBody List<TrainingInputDto> trainingsDto, BindingResult result) {
+    public ResponseEntity<String> createTrainingAndPlayer(@Valid @RequestBody List<TrainingInputDto> trainingsDto, BindingResult result) {
         if(result.hasErrors()){
             throw new ApiRequestException(Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
         }
-        return trainingPlayerService.proccess(trainingsDto);
+        trainingPlayerService.proccess(trainingsDto);
+        return ResponseEntity.created(java.net.URI.create("/training"))
+                .body("Entrenamientos creados exitosamente");
     }
 
 }

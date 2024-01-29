@@ -24,18 +24,16 @@ public class TrainingPlayerServiceImpl implements TrainingPlayerService {
     }
 
     @Override
-    public List<TrainingOutputDto> proccess(List<TrainingInputDto> trainingsDto) {
+    public void proccess(List<TrainingInputDto> trainingsDto) {
         List<TrainingOutputDto> trainingsOutputDto = trainingMapper.dtoToModel(trainingsDto);
         savePlayers(trainingsOutputDto);
         trainingService.saveTrainings(trainingsOutputDto);
-        return trainingsOutputDto;
     }
 
     private void savePlayers(List<TrainingOutputDto> trainingsOutputDto) {
         trainingsOutputDto
                 .forEach(training -> {
-                    training.getPlayer().setId(
-                            playerService.create(training.getPlayer()).getId());
+                            playerService.create(training.getPlayer());
                 });
 
     }

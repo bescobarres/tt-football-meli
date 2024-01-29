@@ -24,9 +24,8 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public PlayerDto create(PlayerDto player) {
         PlayerEntity playerEntity;
-        if (player.getId() != null) {
-            playerEntity = playerRepository.findById(player.getId())
-                    .orElseThrow(() -> new ApiRequestException("Player with id: " + player.getId() + " doesn't exist"));
+        if (playerRepository.findById(player.getId()).isPresent()) {
+            playerEntity = PlayerEntity.builder().id(player.getId()).name(player.getName()).build();
         } else {
             playerEntity = playerRepository.save(playerMapper.modelToEntity(player));
         }

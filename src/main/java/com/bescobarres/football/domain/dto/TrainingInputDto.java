@@ -17,8 +17,10 @@ import java.time.LocalDate;
 @Valid
 public class TrainingInputDto {
 
+    @NotNull(message = "El campo playerId no debe ser NULL")
     private Long playerId;
 
+    @NotNull(message = "El campo name no debe ser NULL ")
     private String name;
 
     @DecimalMin(value = "0.1", message = "El campo power debe ser un valor mayor a 0")

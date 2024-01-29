@@ -30,7 +30,7 @@ public class TrainingRepositoryTest {
 
     @BeforeEach
     public void initializeDatabaseForPlayer(){
-        playerEntity = PlayerEntity.builder().name("Test").build();
+        playerEntity = PlayerEntity.builder().id(1L).name("Test").build();
         playerRepository.save(playerEntity);
 
     }

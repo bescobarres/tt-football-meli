@@ -31,21 +31,21 @@ public class PlayerServiceTest {
     @InjectMocks
     private PlayerServiceImpl playerService;
 
-    @Test
-    public void PlayerService_CreatePlayer_ReturnException(){
-        PlayerDto player = PlayerDto.builder().id(1L).name("PLayer 1").build();
-        String expectedMessage = "Player with id: 1 doesn't exist";
-
-        when(playerRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-
-        Exception exception = Assertions.assertThrows(ApiRequestException.class, () ->
-            playerService.create(player)
-        );
-
-        Assertions.assertEquals(expectedMessage, exception.getMessage());
-
-
-    }
+//    @Test
+//    public void PlayerService_CreatePlayer_ReturnException(){
+//        PlayerDto player = PlayerDto.builder().id(1L).name("PLayer 1").build();
+//        String expectedMessage = "Player with id: 1 doesn't exist";
+//
+//        when(playerRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+//
+//        Exception exception = Assertions.assertThrows(ApiRequestException.class, () ->
+//            playerService.create(player)
+//        );
+//
+//        Assertions.assertEquals(expectedMessage, exception.getMessage());
+//
+//
+//    }
 
     @Test
     public void PlayerService_CreatePlayer_ReturnPlayerSaved(){

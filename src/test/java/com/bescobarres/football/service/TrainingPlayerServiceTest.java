@@ -50,10 +50,9 @@ public class TrainingPlayerServiceTest {
         when(playerService.create(any())).thenReturn(newPlayer);
         doNothing().when(trainingService).saveTrainings(trainingsOutputDto);
 
-        List<TrainingOutputDto> startingLineUpPlayers =
-                trainingPlayerService.proccess(trainingsInputDto);
+        trainingPlayerService.proccess(trainingsInputDto);
 
-        Assertions.assertNotNull(startingLineUpPlayers);
+        verify(trainingService, times(1)).saveTrainings(trainingsOutputDto);
 
 
     }

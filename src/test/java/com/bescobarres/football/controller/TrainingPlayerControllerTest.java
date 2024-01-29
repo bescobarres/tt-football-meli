@@ -24,6 +24,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @WebMvcTest(controllers = TrainingPlayerController.class)
@@ -41,19 +42,17 @@ public class TrainingPlayerControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void TrainingPlayerController_CreateTrainingAndPlayer_ReturnListOfTrainingsByPlayer() throws Exception {
+    public void TrainingPlayerController_CreateTrainingAndPlayer_ReturnIsCreated() throws Exception {
 
         List<TrainingInputDto> trainingsInputDto = TrainingBuilder.getBuildTrainingsInput();
 
-        given(trainingPlayerService.proccess(ArgumentMatchers.any())).willAnswer(invocation ->
-                invocation.getArgument(0));
+        doNothing().when(trainingPlayerService).proccess(ArgumentMatchers.any());
 
         ResultActions response = mockMvc.perform(post("/training")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(trainingsInputDto)));
 
-        response.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].playerId", CoreMatchers.is(1)))
+        response.andExpect(MockMvcResultMatchers.status().isCreated())
                 .andDo(MockMvcResultHandlers.print());
 
 
@@ -63,6 +62,7 @@ public class TrainingPlayerControllerTest {
     public void TrainingPlayerController_CreateTrainingAndPlayer_ReturnExceptionForValidationPasses() throws Exception {
 
         List<TrainingInputDto> trainingsInputDto = List.of(TrainingInputDto.builder()
+                .passes(20L)
                 .power(100D)
                 .time(10L)
                 .date(LocalDate.now())
@@ -70,15 +70,14 @@ public class TrainingPlayerControllerTest {
                 .name("Player 1")
                 .build());
 
-        given(trainingPlayerService.proccess(ArgumentMatchers.any())).willAnswer(invocation ->
-                invocation.getArgument(0));
+        doNothing().when(trainingPlayerService).proccess(ArgumentMatchers.any());
 
         ResultActions response = mockMvc.perform(post("/training")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(trainingsInputDto)));
 
         response.andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message", CoreMatchers.is("El campo passes no debe ser NULL")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message", CoreMatchers.is("El campo playerId no debe ser NULL")))
                 .andDo(MockMvcResultHandlers.print());
 
     }

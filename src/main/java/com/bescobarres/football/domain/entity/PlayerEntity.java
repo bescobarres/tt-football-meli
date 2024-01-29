@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class PlayerEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column

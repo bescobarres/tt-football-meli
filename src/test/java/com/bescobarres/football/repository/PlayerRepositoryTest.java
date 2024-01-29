@@ -24,7 +24,7 @@ public class PlayerRepositoryTest {
 
     @BeforeEach
     public void initializeDatabaseForPlayer(){
-        playerEntity = PlayerEntity.builder().name("Test").build();
+        playerEntity = PlayerEntity.builder().id(20L).name("Test").build();
         playerRepository.save(playerEntity);
     }
 
