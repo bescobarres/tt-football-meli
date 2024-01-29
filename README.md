@@ -43,7 +43,7 @@ que incluyen tener al menos 3 entrenamientos por semana.
 - **Ejemplo de solicitud con curl:**
   ```bash
   curl -X 'POST' \
-    'http://localhost:8080/training' \
+    'https://double-insight-412703.uw.r.appspot.com/training' \
     -H 'accept: */*' \
     -H 'Content-Type: application/json' \
     -d '{
