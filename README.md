@@ -58,12 +58,12 @@ que incluyen tener al menos 3 entrenamientos por semana.
 
 - **Endpoint:** `GET /team`
 - **Ejemplo de solicitud con curl:**
--  Este endpoint puede recibir opcionalmente 2 parametros 'http://localhost:8080/team?startingLineUpQuantity=8&day=2024-01-26'
+-  Este endpoint puede recibir opcionalmente 2 parametros 'https://double-insight-412703.uw.r.appspot.com/team?startingLineUpQuantity=8&day=2024-01-26'
 - **startingLineUpQuantity** Recibe un numero entero que parametriza la cantidad de equipo principal que desea calcular
 - **day** Recibe una fecha de la semana que queremos calcular el equipo principal
   ```bash
   curl -X 'GET' \
-    'http://localhost:8080/team' \
+    'https://double-insight-412703.uw.r.appspot.com/team' \
     -H 'accept: */*' \
     -H 'Content-Type: application/json' \
 
